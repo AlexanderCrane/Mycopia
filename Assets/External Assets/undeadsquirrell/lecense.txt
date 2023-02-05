@@ -1,0 +1,3 @@
+Author: Čestmír Dammer
+License: CC0
+Project: www.kelgar.org
