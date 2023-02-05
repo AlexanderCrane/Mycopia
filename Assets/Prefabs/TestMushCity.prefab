@@ -851,7 +851,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   townName: {fileID: 2726329718453044079}
   resourceCost: 0.1
-  radius: 10
+  cantBuildNearMeRadius: 10
+  networkConnectionRadius: 15
+  MushCityCanvas: {fileID: 2726329718475856151}
 --- !u!65 &1270534615143995865
 BoxCollider:
   m_ObjectHideFlags: 0
