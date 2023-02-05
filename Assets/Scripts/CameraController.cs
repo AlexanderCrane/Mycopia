@@ -47,13 +47,13 @@ public class CameraController : MonoBehaviour
         if (Input.GetKey (KeyCode.W) && transform.position.x < 0f){
             p_Velocity += new Vector3(0, 0 , 1);
         }
-        if (Input.GetKey (KeyCode.S) && transform.position.x > -27f){
+        if (Input.GetKey (KeyCode.S) && transform.position.x > -29f){
             p_Velocity += new Vector3(0, 0, -1);
         }
-        if (Input.GetKey (KeyCode.A) && transform.position.z < 15f){
+        if (Input.GetKey (KeyCode.A) && transform.position.z < 22f){
             p_Velocity += new Vector3(-1, 0, 0);
         }
-        if (Input.GetKey (KeyCode.D) && transform.position.z > -20f){
+        if (Input.GetKey (KeyCode.D) && transform.position.z > -31f){
             p_Velocity += new Vector3(1, 0, 0);
         }
         return p_Velocity;
