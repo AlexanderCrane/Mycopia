@@ -22,7 +22,7 @@ public class CityCreator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && GameManager.Instance.interactionMode == GameManager.InteractionMode.CityPlacement)
         {
             if (EventSystem.current.IsPointerOverGameObject()) return;
 
@@ -36,7 +36,7 @@ public class CityCreator : MonoBehaviour
                 {
                     print("inside mushcity");
                     hit.transform.GetComponent<CityManager>().MushCityCanvas.SetActive(true);
-                    Time.timeScale = 0;
+                    // Time.timeScale = 0;
                     return;
                 }
                 if(hit.point.z > 25f || hit.point.z < -30f || hit.point.x > 21f || hit.point.x < -16)

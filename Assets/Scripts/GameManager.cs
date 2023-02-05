@@ -17,6 +17,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public enum InteractionMode
+    {
+        CityPlacement,
+        Artillery
+    }
+
+    public InteractionMode interactionMode = InteractionMode.CityPlacement;
+
+    public MainHUDController mainHUDController;
     public float waterSupply;
     public float nutrientSupply;
     public List<CityManager> cities;

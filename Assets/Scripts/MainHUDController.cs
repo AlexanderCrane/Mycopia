@@ -5,9 +5,12 @@ using UnityEngine;
 public class MainHUDController : MonoBehaviour
 {
     int defaultMask;
-    public GameObject toggleOffButton;
-    public GameObject toggleOnButton;
+    public GameObject toggleNetworkOffButton;
+    public GameObject toggleNetworkOnButton;
+    public GameObject cityPlacementCanvas;
+    public GameObject artilleryModeCanvas;
     public LayerMask viewNetworkMask;
+    public GameObject currentArtilleryParticle;
 
     private void Start() 
     {
@@ -16,15 +19,50 @@ public class MainHUDController : MonoBehaviour
     public void ToggleMyceliumNetworkOn()
     {
         Camera.main.cullingMask = viewNetworkMask;
-        toggleOnButton.SetActive(false);
-        toggleOffButton.gameObject.SetActive(true);
+        toggleNetworkOnButton.SetActive(false);
+        toggleNetworkOffButton.gameObject.SetActive(true);
     }
 
     public void ToggleMyceliumNetworkOff()
     {
         Camera.main.cullingMask = defaultMask;
-        toggleOffButton.SetActive(false);
-        toggleOnButton.SetActive(true);
+        toggleNetworkOffButton.SetActive(false);
+        toggleNetworkOnButton.SetActive(true);
     }
 
+    public void TurnOnCityPlacementMode()
+    {
+        cityPlacementCanvas.SetActive(true);
+        artilleryModeCanvas.SetActive(false); 
+        GameManager.Instance.interactionMode = GameManager.InteractionMode.CityPlacement;
+        if(currentArtilleryParticle != null)
+        {
+            currentArtilleryParticle.SetActive(false);
+        }
+    }
+
+    // public void TurnOffCityPlacementMode()
+    // {
+    //     cityPlacementCanvas.SetActive(false);
+    //     artilleryModeCanvas.SetActive(true);
+    // }  
+
+    public void TurnOnArtilleryMode(GameObject artilleryParticle)
+    {
+        foreach(CityManager city in GameManager.Instance.cities)
+        {
+            city.MushCityCanvas.SetActive(false);
+        }
+
+        currentArtilleryParticle = artilleryParticle;
+        cityPlacementCanvas.SetActive(false);
+        artilleryModeCanvas.SetActive(true);
+        GameManager.Instance.interactionMode = GameManager.InteractionMode.Artillery;
+    }
+
+    // public void TurnOffArtilleryMode()
+    // {
+    //     cityPlacementCanvas.SetActive(true);
+    //     artilleryModeCanvas.SetActive(false); 
+    // }
 }

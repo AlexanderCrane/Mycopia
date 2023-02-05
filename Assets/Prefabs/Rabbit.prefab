@@ -938,7 +938,7 @@ GameObject:
   - component: {fileID: 2865029556964712058}
   m_Layer: 0
   m_Name: Rabbit
-  m_TagString: Untagged
+  m_TagString: rabbit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1031,6 +1031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98fb71329570d414d9511e18324591b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  running: 0
   currentTarget: {fileID: 0}
 --- !u!136 &2865029556964712058
 CapsuleCollider:

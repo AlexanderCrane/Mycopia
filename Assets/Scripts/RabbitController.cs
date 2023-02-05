@@ -10,6 +10,7 @@ public class RabbitController : MonoBehaviour
     NavMeshAgent agent;
     bool finishedEating = true;
     Animator animator;
+    public bool dead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,7 @@ public class RabbitController : MonoBehaviour
         // }
 
         // Check if we've reached the destination
-        if (!agent.pathPending && currentTarget != null)
+        if (!agent.pathPending && currentTarget != null && !dead)
         {
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
@@ -52,12 +53,24 @@ public class RabbitController : MonoBehaviour
             }
         }
     }
+    
+    public IEnumerator Die()
+    {
+        Debug.Log("Rabbit attempting to die");
+        dead = true;
+        animator.SetInteger("AnimIndex", 2);
+        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<CapsuleCollider>().enabled = false;
+        // agent.enabled = false;
+        yield return new WaitForSeconds(2);
+        Destroy(this.gameObject);
+    }
 
     public IEnumerator waitToChooseNewTarget()
     {
         Debug.Log("Started target acquisition coroutine");
         yield return new WaitForSeconds(3f);
-        if(currentTarget == null && GameManager.Instance.cities.Count > 0)
+        if(currentTarget == null && GameManager.Instance.cities.Count > 0 && !dead)
         {
             int randomlyChosenTarget = Random.Range(0, GameManager.Instance.cities.Count);
             currentTarget = GameManager.Instance.cities[randomlyChosenTarget].transform;
@@ -66,7 +79,7 @@ public class RabbitController : MonoBehaviour
             animator.SetInteger("AnimIndex", 1);
         }
 
-        if(currentTarget == null)
+        if(currentTarget == null && !dead)
         {
             StartCoroutine(waitToChooseNewTarget());
         }

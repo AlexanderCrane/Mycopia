@@ -13,19 +13,13 @@ public class RabbitSpawner : MonoBehaviour
         StartCoroutine(spawnRabbitsCoroutine());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public IEnumerator spawnRabbitsCoroutine()
     {
         yield return new WaitForSeconds(5f);
         if(GameManager.Instance.currentSpawnedRabbits.Count < 3)
         {
             int spawnPointIndex = Random.Range(0, spawnPoints.Count - 1);
-            GameObject newRabbit = GameObject.Instantiate(rabbitPrefab, spawnPoints[spawnPointIndex]);
+            GameObject newRabbit = GameObject.Instantiate(rabbitPrefab, spawnPoints[spawnPointIndex].position, transform.rotation);
         }
     }
 }
