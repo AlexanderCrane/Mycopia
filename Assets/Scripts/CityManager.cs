@@ -9,6 +9,7 @@ public class CityManager : MonoBehaviour
     public float resourceCost = 0.1f;
     public float cantBuildNearMeRadius = 10f;
     public float networkConnectionRadius = 15f;
+    public GameObject MushCityCanvas;
  
     // Start is called before the first frame update
     void Start()
@@ -21,5 +22,10 @@ public class CityManager : MonoBehaviour
     {
         GameManager.Instance.waterSupply -= resourceCost * Time.deltaTime;
         GameManager.Instance.nutrientSupply -= resourceCost * Time.deltaTime;
+    }
+
+    public void unpauseTime()
+    {
+        Time.timeScale = 1;
     }
 }
