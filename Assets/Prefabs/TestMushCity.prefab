@@ -951,6 +951,7 @@ MonoBehaviour:
   cantBuildNearMeRadius: 10
   networkConnectionRadius: 15
   MushCityCanvas: {fileID: 2726329718475856151}
+  connectedCities: []
 --- !u!65 &1270534615143995865
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1468,6 +1469,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2726329719599759916}
     m_Modifications:
+    - target: {fileID: 759517169056107558, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 759517169056107558, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 759517169056107558, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 759517169056107558, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2571020204571236546, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1499,6 +1516,34 @@ PrefabInstance:
     - target: {fileID: 3644379766359018406, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378455252422941970, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378455252422941970, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378455252422941970, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1486009836965385426}
+    - target: {fileID: 5378455252422941970, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378455252422941970, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DeleteCity
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378455252422941970, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CityManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378455252422941970, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7542187078705101561, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -1582,11 +1627,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7542187078705101563, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.729
+      value: -0.134
       objectReference: {fileID: 0}
     - target: {fileID: 7542187078705101563, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.939
+      value: 3.475
       objectReference: {fileID: 0}
     - target: {fileID: 7542187078705101563, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

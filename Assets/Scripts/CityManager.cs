@@ -10,6 +10,8 @@ public class CityManager : MonoBehaviour
     public float cantBuildNearMeRadius = 10f;
     public float networkConnectionRadius = 15f;
     public GameObject MushCityCanvas;
+    public List<CityManager> connectedCities;
+    public List<GameObject> connectedMyceliumPaths;
  
     // Start is called before the first frame update
     void Start()
@@ -27,5 +29,20 @@ public class CityManager : MonoBehaviour
     public void unpauseTime()
     {
         Time.timeScale = 1;
+    }
+    
+    public void DeleteCity()
+    {
+        GameManager.Instance.cities.Remove(this);
+        foreach(GameObject myceliumPath in connectedMyceliumPaths)
+        {
+            Destroy(myceliumPath);
+            foreach(CityManager connectedCity in connectedCities)
+            {
+                connectedCity.connectedMyceliumPaths.Remove(myceliumPath);
+                connectedCity.connectedCities.Remove(this);
+            }
+        }
+        Destroy(this.gameObject);
     }
 }

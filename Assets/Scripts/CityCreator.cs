@@ -81,28 +81,37 @@ public class CityCreator : MonoBehaviour
                 usedCityNames.Add(cityName);
 
                 GameObject newCity = GameObject.Instantiate(mushroomCityPrefab, hit.point, mushroomCityPrefab.transform.rotation);
+                newCity.gameObject.name = cityName;
                 CityManager newCityManager = newCity.GetComponent<CityManager>();
                 newCityManager.townName.text = cityName;
 
-                foreach(CityManager city in GameManager.Instance.cities)
+                foreach(CityManager connectedCityManager in GameManager.Instance.cities)
                 {
                     if(GameManager.Instance.cities.Count <= 0)
                     {
                         break;
                     }
-                    float distance = Vector3.Distance(hit.point, city.transform.position);
 
-                    if(distance < city.networkConnectionRadius)
+                    float distance = Vector3.Distance(hit.point, connectedCityManager.transform.position);
+
+                    if(distance < connectedCityManager.networkConnectionRadius)
                     {
-                        GameObject newNetworkPoint = GameObject.Instantiate(networkLinePointPrefab, new Vector3(hit.point.x, hit.point.y - 0.25f, hit.point.z), mushroomCityPrefab.transform.rotation);
-                        NetworkLineRenderer lineRenderer = newNetworkPoint.GetComponent<NetworkLineRenderer>();
-                        lineRenderer.Setup(newCity.gameObject, city.gameObject);
+                        connectedCityManager.connectedCities.Add(newCityManager);
+                        newCityManager.connectedCities.Add(connectedCityManager);
+
+                        GameObject newNetworkPath = GameObject.Instantiate(networkLinePointPrefab, new Vector3(hit.point.x, hit.point.y - 0.25f, hit.point.z), mushroomCityPrefab.transform.rotation);
+                        NetworkLineRenderer lineRenderer = newNetworkPath.GetComponent<NetworkLineRenderer>();
+
+                        newNetworkPath.gameObject.name = connectedCityManager.gameObject.name + " to " + newCity.gameObject.name;
+
+                        connectedCityManager.connectedMyceliumPaths.Add(newNetworkPath);
+                        newCityManager.connectedMyceliumPaths.Add(newNetworkPath);
+                        
+                        lineRenderer.Setup(newCity.gameObject, connectedCityManager.gameObject);
                     }
                 }
 
                 GameManager.Instance.cities.Add(newCityManager);
-                
-                // Do something with the object that was hit by the raycast.
             }
         }
     }
