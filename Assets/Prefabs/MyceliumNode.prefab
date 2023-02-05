@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6839839051857964936}
   - component: {fileID: 6839839051857964939}
   - component: {fileID: 6839839051857964938}
-  - component: {fileID: 6839839051857964941}
   - component: {fileID: 6839839051857964940}
+  - component: {fileID: 6839839051857964941}
   m_Layer: 6
   m_Name: MyceliumNode
   m_TagString: Untagged
@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6839839051857964942}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -99,6 +99,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6839839051857964940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6839839051857964942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8492da92c1ff44ab27f6c5bf865dca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nutrientSourceLineColor: {fileID: 2100000, guid: 84bcb5cc855268d419f67ab252b8a300, type: 2}
+  waterSourceLineColor: {fileID: 2100000, guid: 5653a172ab341604c816e1fc379769ed, type: 2}
+  bothResourcesLineColor: {fileID: 2100000, guid: 5d3b58338732472438d994f9de2ed177, type: 2}
 --- !u!120 &6839839051857964941
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -198,15 +213,3 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &6839839051857964940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6839839051857964942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb8492da92c1ff44ab27f6c5bf865dca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

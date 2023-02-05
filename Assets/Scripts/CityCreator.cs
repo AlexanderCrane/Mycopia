@@ -94,9 +94,9 @@ public class CityCreator : MonoBehaviour
 
                     if(distance < city.networkConnectionRadius)
                     {
-                        GameObject newNetworkPoint = GameObject.Instantiate(networkLinePointPrefab, hit.point, mushroomCityPrefab.transform.rotation);
+                        GameObject newNetworkPoint = GameObject.Instantiate(networkLinePointPrefab, new Vector3(hit.point.x, hit.point.y - 0.25f, hit.point.z), mushroomCityPrefab.transform.rotation);
                         NetworkLineRenderer lineRenderer = newNetworkPoint.GetComponent<NetworkLineRenderer>();
-                        lineRenderer.Setup(city.gameObject);
+                        lineRenderer.Setup(newCity.gameObject, city.gameObject);
                     }
                 }
 

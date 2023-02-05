@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     public float waterSupply;
     public float nutrientSupply;
     public List<CityManager> cities;
+    public List<GameObject> wateringHoles;
+    public List<GameObject> deadAnimals;
+    
 
     void Awake()
     {
