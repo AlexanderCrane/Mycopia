@@ -22,11 +22,13 @@ public class GameManager : MonoBehaviour
     public List<CityManager> cities;
     public List<GameObject> wateringHoles;
     public List<GameObject> deadAnimals;
+    public List<GameObject> currentSpawnedRabbits;
     
 
     void Awake()
     {
         cities = new List<CityManager>();
         instance = this;
+        Physics.IgnoreLayerCollision(7, 8);
     }
 }

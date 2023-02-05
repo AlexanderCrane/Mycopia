@@ -6,6 +6,7 @@ using TMPro;
 public class CityManager : MonoBehaviour
 {
     public TextMeshProUGUI townName;
+    public bool capitalCity = false;
     public float resourceCost = 0.1f;
     public float cantBuildNearMeRadius = 10f;
     public float networkConnectionRadius = 15f;
