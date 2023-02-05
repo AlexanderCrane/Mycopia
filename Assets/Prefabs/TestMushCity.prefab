@@ -811,7 +811,7 @@ GameObject:
   - component: {fileID: 1270534615143995865}
   m_Layer: 0
   m_Name: TestMushCity
-  m_TagString: Untagged
+  m_TagString: mushcity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -852,6 +852,7 @@ MonoBehaviour:
   townName: {fileID: 2726329718453044079}
   resourceCost: 0.1
   radius: 20
+  MushCityCanvas: {fileID: 2726329718475856151}
 --- !u!65 &1270534615143995865
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1618,6 +1619,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7816623674106123467, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7816623674106123467, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7816623674106123467, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1486009836965385426}
+    - target: {fileID: 7816623674106123467, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7816623674106123467, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: unpauseTime
+      objectReference: {fileID: 0}
+    - target: {fileID: 7816623674106123467, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: CityManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7816623674106123467, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
 --- !u!114 &2726329718453044079 stripped
@@ -1634,5 +1663,10 @@ MonoBehaviour:
 --- !u!224 &2726329718475856144 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7542187078705101563, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
+  m_PrefabInstance: {fileID: 5584152785204159467}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2726329718475856151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7542187078705101564, guid: b1b9b1b8f752bd649abe67194c445484, type: 3}
   m_PrefabInstance: {fileID: 5584152785204159467}
   m_PrefabAsset: {fileID: 0}

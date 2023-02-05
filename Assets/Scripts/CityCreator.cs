@@ -26,6 +26,15 @@ public class CityCreator : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit)) {
+                print("casting ray");
+                print(hit.transform.tag);
+                if(hit.collider.isTrigger && hit.transform.tag == "mushcity")
+                {
+                    print("inside mushcity");
+                    hit.transform.GetComponent<CityManager>().MushCityCanvas.SetActive(true);
+                    Time.timeScale = 0;
+                    return;
+                }
                 if(hit.point.z > 25f || hit.point.z < -30f || hit.point.x > 21f || hit.point.x < -16)
                 {
                     return;
