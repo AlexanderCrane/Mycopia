@@ -26,10 +26,4 @@ public class GameManager : MonoBehaviour
         cities = new List<CityManager>();
         instance = this;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

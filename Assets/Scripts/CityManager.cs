@@ -7,7 +7,8 @@ public class CityManager : MonoBehaviour
 {
     public TextMeshProUGUI townName;
     public float resourceCost = 0.1f;
-    public float radius = 10f;
+    public float cantBuildNearMeRadius = 10f;
+    public float networkConnectionRadius = 15f;
  
     // Start is called before the first frame update
     void Start()

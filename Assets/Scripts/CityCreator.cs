@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CityCreator : MonoBehaviour
 {
     public GameObject mushroomCityPrefab;
+    public GameObject networkLinePointPrefab;
     public bool placingCity = true; // TODO: This should change to be false, and only set to true when user initiates city placement
 
     string[] namePrefixes = new string[] { "Spore", "Fungus", "Myco", "Toadstool", "Mold", "Truffle", "Rot", "Muck" };
@@ -22,6 +24,8 @@ public class CityCreator : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -36,10 +40,10 @@ public class CityCreator : MonoBehaviour
                 {
                     float distance = Vector3.Distance(hit.point, city.transform.position);
 
-                    if(distance < city.radius)
+                    if(distance < city.cantBuildNearMeRadius)
                     {
                         overlapsExistingCity = true;
-                        Debug.Log("Distance from " + city.townName.text + " is " + distance + " which is less than " + city.radius);
+                        Debug.Log("Distance from " + city.townName.text + " is " + distance + " which is less than " + city.cantBuildNearMeRadius);
                         break;
                     }
                 }
@@ -70,6 +74,23 @@ public class CityCreator : MonoBehaviour
                 GameObject newCity = GameObject.Instantiate(mushroomCityPrefab, hit.point, mushroomCityPrefab.transform.rotation);
                 CityManager newCityManager = newCity.GetComponent<CityManager>();
                 newCityManager.townName.text = cityName;
+
+                foreach(CityManager city in GameManager.Instance.cities)
+                {
+                    if(GameManager.Instance.cities.Count <= 0)
+                    {
+                        break;
+                    }
+                    float distance = Vector3.Distance(hit.point, city.transform.position);
+
+                    if(distance < city.networkConnectionRadius)
+                    {
+                        GameObject newNetworkPoint = GameObject.Instantiate(networkLinePointPrefab, hit.point, mushroomCityPrefab.transform.rotation);
+                        NetworkLineRenderer lineRenderer = newNetworkPoint.GetComponent<NetworkLineRenderer>();
+                        lineRenderer.Setup(city.gameObject);
+                    }
+                }
+
                 GameManager.Instance.cities.Add(newCityManager);
                 
                 // Do something with the object that was hit by the raycast.

@@ -851,7 +851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   townName: {fileID: 2726329718453044079}
   resourceCost: 0.1
-  radius: 20
+  radius: 10
 --- !u!65 &1270534615143995865
 BoxCollider:
   m_ObjectHideFlags: 0
