@@ -26,6 +26,29 @@ public class CityCreator : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit)) {
+                if(hit.point.z > 25f || hit.point.z < -30f || hit.point.x > 21f || hit.point.x < -16)
+                {
+                    return;
+                }
+                bool overlapsExistingCity = false;
+                
+                foreach(CityManager city in GameManager.Instance.cities)
+                {
+                    float distance = Vector3.Distance(hit.point, city.transform.position);
+
+                    if(distance < city.radius)
+                    {
+                        overlapsExistingCity = true;
+                        Debug.Log("Distance from " + city.townName.text + " is " + distance + " which is less than " + city.radius);
+                        break;
+                    }
+                }
+
+                if(overlapsExistingCity)
+                {
+                    return;
+                }
+
                 string prefix = namePrefixes[Random.Range(0, namePrefixes.Length)];
                 string suffix = nameSuffixes[Random.Range(0, nameSuffixes.Length)];
                 string cityName = prefix + suffix;
@@ -44,8 +67,10 @@ public class CityCreator : MonoBehaviour
                 
                 usedCityNames.Add(cityName);
 
-                GameObject city = GameObject.Instantiate(mushroomCityPrefab, hit.point, mushroomCityPrefab.transform.rotation);
-                city.GetComponent<CityManager>().townName.text = cityName;
+                GameObject newCity = GameObject.Instantiate(mushroomCityPrefab, hit.point, mushroomCityPrefab.transform.rotation);
+                CityManager newCityManager = newCity.GetComponent<CityManager>();
+                newCityManager.townName.text = cityName;
+                GameManager.Instance.cities.Add(newCityManager);
                 
                 // Do something with the object that was hit by the raycast.
             }
