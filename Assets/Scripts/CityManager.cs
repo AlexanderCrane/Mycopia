@@ -103,5 +103,7 @@ public class CityManager : MonoBehaviour
     {
         GameManager.Instance.nutrientSupply += 30f;
         GameManager.Instance.waterSupply += 10f;
+        GameManager.Instance.totalNutrientsText.text = "Total Nutrients: " + GameManager.Instance.nutrientSupply;
+        GameManager.Instance.totalWaterText.text = "Total Water: " + GameManager.Instance.waterSupply;
     }
 }

@@ -54,6 +54,10 @@ public class GameManager : MonoBehaviour
     {
         if(cities.Count <= 0)
         {
+            if(nutrientSupply <= 30 || waterSupply <= 10)
+            {
+                mainHUDController.GameOver();
+            }
             nutrientGain = 0;
             waterGain = 0;
         }
