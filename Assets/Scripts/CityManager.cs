@@ -66,7 +66,25 @@ public class CityManager : MonoBehaviour
     
     public void DeleteCity()
     {
+        foreach(GameObject rabbit in GameManager.Instance.currentSpawnedRabbits)
+        {
+            Debug.Log("Changing target for rabbit: " + rabbit);
+            RabbitController rabbitController = rabbit.GetComponent<RabbitController>();
+            if(rabbitController.currentTarget == this.gameObject.transform)
+            {
+                Debug.Log("Target was deleted. Changing.");
+                rabbitController.ChangeTarget();
+            }
+        }
+
         GameManager.Instance.cities.Remove(this);
+        if(GameManager.Instance.cities.Count > 0)
+        {
+            CityManager newCapital = GameManager.Instance.cities[0];
+            newCapital.name = "Capital: " + newCapital.name;
+            newCapital.townName.text = newCapital.name;
+        }
+
         foreach(GameObject myceliumPath in connectedMyceliumPaths)
         {
             Destroy(myceliumPath);

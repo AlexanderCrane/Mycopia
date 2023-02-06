@@ -20,6 +20,7 @@ public class RabbitSpawner : MonoBehaviour
         {
             int spawnPointIndex = Random.Range(0, spawnPoints.Count - 1);
             GameObject newRabbit = GameObject.Instantiate(rabbitPrefab, spawnPoints[spawnPointIndex].position, transform.rotation);
+            GameManager.Instance.currentSpawnedRabbits.Add(newRabbit);
         }
     }
 }

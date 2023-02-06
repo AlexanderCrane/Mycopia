@@ -6,6 +6,8 @@ TagManager:
   tags:
   - mushcity
   - ground
+  - projectile
+  - rabbit
   layers:
   - Default
   - TransparentFX

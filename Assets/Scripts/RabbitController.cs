@@ -53,14 +53,21 @@ public class RabbitController : MonoBehaviour
             }
         }
     }
+
+    public void ChangeTarget()
+    {
+        currentTarget = null;
+        StartCoroutine(waitToChooseNewTarget());
+    }
     
     public IEnumerator Die()
     {
-        Debug.Log("Rabbit attempting to die");
         dead = true;
         animator.SetInteger("AnimIndex", 2);
         GetComponent<Rigidbody>().useGravity = false;
         GetComponent<CapsuleCollider>().enabled = false;
+        GameManager.Instance.currentSpawnedRabbits.Remove(this.gameObject);
+
         // agent.enabled = false;
         yield return new WaitForSeconds(2);
         Destroy(this.gameObject);
@@ -68,7 +75,6 @@ public class RabbitController : MonoBehaviour
 
     public IEnumerator waitToChooseNewTarget()
     {
-        Debug.Log("Started target acquisition coroutine");
         yield return new WaitForSeconds(3f);
         if(currentTarget == null && GameManager.Instance.cities.Count > 0 && !dead)
         {
@@ -89,10 +95,17 @@ public class RabbitController : MonoBehaviour
     {
         finishedEating = false;
         yield return new WaitForSeconds(3f);
-        CityManager targetCityManager = currentTarget.GetComponent<CityManager>();
-        targetCityManager.DeleteCity();
-        currentTarget = null;
-        finishedEating = true;
-        StartCoroutine(waitToChooseNewTarget());
+        if(currentTarget == null)
+        {
+            ChangeTarget();
+        }
+        else
+        {
+            CityManager targetCityManager = currentTarget.GetComponent<CityManager>();
+            targetCityManager.DeleteCity();
+            currentTarget = null;
+            finishedEating = true;
+            StartCoroutine(waitToChooseNewTarget());
+        }
     }
 }

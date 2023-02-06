@@ -30,11 +30,8 @@ public class CityCreator : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit)) {
-                print("casting ray");
-                print(hit.transform.tag);
                 if(hit.collider.isTrigger && hit.transform.tag == "mushcity")
                 {
-                    print("inside mushcity");
                     hit.transform.GetComponent<CityManager>().MushCityCanvas.SetActive(true);
                     // Time.timeScale = 0;
                     return;
@@ -52,7 +49,7 @@ public class CityCreator : MonoBehaviour
                     if(distance < city.cantBuildNearMeRadius)
                     {
                         overlapsExistingCity = true;
-                        Debug.Log("Distance from " + city.townName.text + " is " + distance + " which is less than " + city.cantBuildNearMeRadius);
+                        // Debug.Log("Distance from " + city.townName.text + " is " + distance + " which is less than " + city.cantBuildNearMeRadius);
                         break;
                     }
                 }
@@ -68,7 +65,7 @@ public class CityCreator : MonoBehaviour
 
                 while(true)
                 {
-                    if(usedCityNames.Contains(cityName))
+                    if(usedCityNames.Contains(cityName) || usedCityNames.Contains("Capital: " + cityName))
                     {
                         cityName = "New " + cityName;
                     }
@@ -76,6 +73,11 @@ public class CityCreator : MonoBehaviour
                     {
                         break;
                     }
+                }
+
+                if(GameManager.Instance.cities.Count <= 0)
+                {
+                    cityName = "Capital: " + cityName; 
                 }
                 
                 usedCityNames.Add(cityName);
@@ -112,6 +114,8 @@ public class CityCreator : MonoBehaviour
                 }
 
                 GameManager.Instance.cities.Add(newCityManager);
+
+                GameManager.Instance.EvaluateConnectedNutrients();
             }
         }
     }
