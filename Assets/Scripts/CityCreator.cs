@@ -40,6 +40,11 @@ public class CityCreator : MonoBehaviour
                 {
                     return;
                 }
+
+                if(GameManager.Instance.nutrientSupply < 30f || GameManager.Instance.waterSupply < 10f)
+                {
+                    return;
+                }
                 bool overlapsExistingCity = false;
                 
                 foreach(CityManager city in GameManager.Instance.cities)
@@ -83,6 +88,10 @@ public class CityCreator : MonoBehaviour
                 usedCityNames.Add(cityName);
 
                 GameObject newCity = GameObject.Instantiate(mushroomCityPrefab, hit.point, mushroomCityPrefab.transform.rotation);
+                GameManager.Instance.nutrientSupply -= 30f;
+                GameManager.Instance.waterSupply -= 10f;
+
+
                 newCity.gameObject.name = cityName;
                 CityManager newCityManager = newCity.GetComponent<CityManager>();
                 newCityManager.townName.text = cityName;

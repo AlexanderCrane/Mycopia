@@ -64,6 +64,11 @@ public class GameManager : MonoBehaviour
 
         totalNutrientsText.text = "Total Nutrients: " + nutrientSupply;
         totalWaterText.text = "Total Water: " + waterSupply;
+
+        if(nutrientSupply <= 0 || waterSupply <= 0)
+        {
+            mainHUDController.GameOver();
+        }
     }
 
     public void EvaluateConnectedNutrients()

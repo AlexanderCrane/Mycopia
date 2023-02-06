@@ -98,4 +98,10 @@ public class CityManager : MonoBehaviour
         GameManager.Instance.EvaluateConnectedWater();
         Destroy(this.gameObject);
     }
+
+    public void ProcessRefund()
+    {
+        GameManager.Instance.nutrientSupply += 30f;
+        GameManager.Instance.waterSupply += 10f;
+    }
 }

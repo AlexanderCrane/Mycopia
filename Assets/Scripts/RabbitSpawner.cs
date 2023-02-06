@@ -16,11 +16,17 @@ public class RabbitSpawner : MonoBehaviour
     public IEnumerator spawnRabbitsCoroutine()
     {
         yield return new WaitForSeconds(5f);
+        int chanceToSpawn = Random.Range(0, 100);
+        Debug.Log("Random chance to spawn is " + chanceToSpawn);
         if(GameManager.Instance.currentSpawnedRabbits.Count < 3)
         {
-            int spawnPointIndex = Random.Range(0, spawnPoints.Count - 1);
-            GameObject newRabbit = GameObject.Instantiate(rabbitPrefab, spawnPoints[spawnPointIndex].position, transform.rotation);
-            GameManager.Instance.currentSpawnedRabbits.Add(newRabbit);
+            if(chanceToSpawn < 50)
+            {
+                int spawnPointIndex = Random.Range(0, spawnPoints.Count - 1);
+                GameObject newRabbit = GameObject.Instantiate(rabbitPrefab, spawnPoints[spawnPointIndex].position, transform.rotation);
+                GameManager.Instance.currentSpawnedRabbits.Add(newRabbit);
+            }
+            StartCoroutine(spawnRabbitsCoroutine());
         }
     }
 }

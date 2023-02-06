@@ -9,8 +9,10 @@ public class MainHUDController : MonoBehaviour
     public GameObject toggleNetworkOnButton;
     public GameObject cityPlacementCanvas;
     public GameObject artilleryModeCanvas;
+    public GameObject gameOverCanvas;
     public LayerMask viewNetworkMask;
     public GameObject currentArtilleryParticle;
+    public GameObject mainExitButton;
 
     private void Start() 
     {
@@ -39,6 +41,10 @@ public class MainHUDController : MonoBehaviour
         {
             currentArtilleryParticle.SetActive(false);
         }
+        foreach(CityManager city in GameManager.Instance.cities)
+        {
+            city.artilleryMode = false;
+        }
     }
 
     // public void TurnOffCityPlacementMode()
@@ -65,4 +71,16 @@ public class MainHUDController : MonoBehaviour
     //     cityPlacementCanvas.SetActive(true);
     //     artilleryModeCanvas.SetActive(false); 
     // }
+
+    public void GameOver()
+    {
+        gameOverCanvas.SetActive(true);
+        mainExitButton.SetActive(false);
+        Time.timeScale = 0;
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
