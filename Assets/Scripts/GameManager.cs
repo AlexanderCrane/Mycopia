@@ -27,7 +27,9 @@ public class GameManager : MonoBehaviour
     public InteractionMode interactionMode = InteractionMode.CityPlacement;
 
     public MainHUDController mainHUDController;
+    public float waterGain = 0f;
     public float waterSupply = 30f;
+    public float nutrientGain = 0f;
     public float nutrientSupply = 90f;
     public List<CityManager> cities;
     public List<GameObject> wateringHoles;
@@ -50,27 +52,55 @@ public class GameManager : MonoBehaviour
 
     private void Update() 
     {
+        if(cities.Count <= 0)
+        {
+            nutrientGain = 0;
+            waterGain = 0;
+        }
+
+        GameManager.Instance.nutrientSupply += nutrientGain * Time.deltaTime;
+        GameManager.Instance.waterSupply += waterGain * Time.deltaTime;
+
+
         totalNutrientsText.text = "Total Nutrients: " + nutrientSupply;
         totalWaterText.text = "Total Water: " + waterSupply;
     }
 
-    public int EvaluateConnectedNutrients()
+    public void EvaluateConnectedNutrients()
     {
         visitedCities = new List<CityManager>();
         int totalConnectedNutrients = 0;
 
         if(cities.Count <= 0)
         {
-            return 0;
+            return;
         }
         
         visitedCities.Add(cities[0]);
         Debug.Log("Visited " + cities[0].name);
         foreach(CityManager connectedCity in cities[0].connectedCities)
         {
-            totalConnectedNutrients += EvaluateConnectedNutrients(connectedCity, totalConnectedNutrients);
+            totalConnectedNutrients += EvaluateConnectedNutrients(connectedCity, 0);
         }
-        return totalConnectedNutrients;
+        foreach(GameObject squirrel in deadAnimals)
+        {
+            float distance = Vector3.Distance(cities[0].gameObject.transform.position, squirrel.transform.position);
+
+            if(distance < 2f)
+            {
+                totalConnectedNutrients += 1;
+            }
+        }
+        Debug.Log("Result of DFS searching for connected nutrients: " + totalConnectedNutrients);
+        connectedNutrientsText.text = "Nutrients Connected to Capital: " + totalConnectedNutrients;
+        if(cities.Count <= 0)
+        {
+            nutrientGain = 0;
+        }
+        else
+        {
+            nutrientGain = (float)totalConnectedNutrients;
+        }
     }
 
     public int EvaluateConnectedNutrients(CityManager city, int totalConnectedNutrients)
@@ -86,31 +116,91 @@ public class GameManager : MonoBehaviour
         visitedCities.Add(city);
         foreach(CityManager connectedCity in city.connectedCities)
         {
-            totalConnectedNutrients += EvaluateConnectedNutrients(connectedCity, totalConnectedNutrients);
+            if(!visitedCities.Contains(connectedCity))
+            {
+                totalConnectedNutrients += EvaluateConnectedNutrients(connectedCity, totalConnectedNutrients);
+            }
+        }
+
+        foreach(GameObject squirrel in deadAnimals)
+        {
+            float distance = Vector3.Distance(city.gameObject.transform.position, squirrel.transform.position);
+
+            if(distance < 2f)
+            {
+                Debug.Log("City " + city.name + " is close to water, incrementing");
+                totalConnectedNutrients += 1;
+            }
         }
         return totalConnectedNutrients;
     }
 
-    public int EvaluateConnectedWater()
+    public void EvaluateConnectedWater()
     {
         visitedCities = new List<CityManager>();
+        int totalConnectedWater = 0;
 
         if(cities.Count <= 0)
         {
-            return 0;
+            return;
         }
-
+        
         visitedCities.Add(cities[0]);
         Debug.Log("Visited " + cities[0].name);
         foreach(CityManager connectedCity in cities[0].connectedCities)
         {
-            return EvaluateConnectedWater(connectedCity);
+            totalConnectedWater += EvaluateConnectedNutrients(connectedCity, 0);
         }
-        return 0;
+        foreach(GameObject water in wateringHoles)
+        {
+            float distance = Vector3.Distance(cities[0].gameObject.transform.position, water.transform.position);
+
+            if(distance < 2f)
+            {
+                totalConnectedWater += 1;
+            }
+        }
+        Debug.Log("Result of DFS searching for connected water: " + totalConnectedWater);
+        connectedWaterText.text = "Water Connected to Capital: " + totalConnectedWater;
+        if(cities.Count <= 0)
+        {
+            waterGain = 0;
+        }
+        else
+        {
+            waterGain = (float)totalConnectedWater;
+        }
     }
 
-    public int EvaluateConnectedWater(CityManager city)
+    public int EvaluateConnectedWater(CityManager city, int totalConnectedWater)
     {
-        return 1;
+        // If already visited
+        if(visitedCities.Contains(city))
+        {
+            return 0;
+        }
+
+        Debug.Log("Visited " + city.name);
+
+        visitedCities.Add(city);
+        foreach(CityManager connectedCity in city.connectedCities)
+        {
+            if(!visitedCities.Contains(connectedCity))
+            {
+                totalConnectedWater += EvaluateConnectedNutrients(connectedCity, totalConnectedWater);
+            }
+        }
+
+        foreach(GameObject water in wateringHoles)
+        {
+            float distance = Vector3.Distance(city.gameObject.transform.position, water.transform.position);
+
+            if(distance < 2f)
+            {
+                Debug.Log("City " + city.name + " is close to a squirrel, incrementing");
+                totalConnectedWater += 1;
+            }
+        }
+        return totalConnectedWater;
     }
 }

@@ -116,6 +116,7 @@ public class CityCreator : MonoBehaviour
                 GameManager.Instance.cities.Add(newCityManager);
 
                 GameManager.Instance.EvaluateConnectedNutrients();
+                GameManager.Instance.EvaluateConnectedWater();
             }
         }
     }
